@@ -1,6 +1,6 @@
 import logging
 import os
-
+import apidata
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 
@@ -10,7 +10,8 @@ def start(bot, update):
 def go(bot, update):
     update.effective_message.reply_text("go!")
 def league(bot, update):
-    update.effective_message.reply_text("ole-ole-ole-ole!")
+    
+    update.effective_message.reply_text(apidata.getallleague())
 def echo(bot, update):
     update.effective_message.reply_text(update.effective_message.text)
 
