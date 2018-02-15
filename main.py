@@ -19,7 +19,7 @@ def echo(bot, update):
 		output=apidata.mainfunc(txt[0],txt[1],txt[2])
 		#print str(message.chat.id)
 		#bot.send_message(message.chat.id,output)
-		update.effective_message.reply_photo('test.png')
+		update.effective_message.reply_photo(photo=open('test.png','rb'))
 
 		#bot.send_photo(message.chat.id,photo=open('test.png','rb'))
 
