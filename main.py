@@ -17,17 +17,18 @@ def echo(bot, update):
         update.effective_message.reply_text(apidata.allcomands(update.effective_message.text[1:]))
     else:
         try:
-            txt=message.text
-            txt=txt.split("%")
-            output=apidata.mainfunc(txt[0],txt[1],txt[2])
-			#print str(message.chat.id)
-        		#bot.send_message(message.chat.id,output)
-            update.effective_message.send_photo('test.png')
+	    	txt=message.text
+	    	txt=txt.split("%")
+	    	output=apidata.mainfunc(txt[0],txt[1],txt[2])
+		#print str(message.chat.id)
+		#bot.send_message(message.chat.id,output)
+		update.effective_message.send_photo('test.png')
                 
-            #bot.send_photo(message.chat.id,photo=open('test.png','rb'))
+            	#bot.send_photo(message.chat.id,photo=open('test.png','rb'))
 
         except:
-            update.effective_message.reply_text('Ola-la')
+		continue
+            	#update.effective_message.reply_text('Ola-la')
             
 def error(bot, update, error):
     logger.warning('Update "%s" caused error "%s"', update, error)
