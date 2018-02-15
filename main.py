@@ -9,7 +9,8 @@ def start(bot, update):
 
 def go(bot, update):
     update.effective_message.reply_text("go!")
-
+def league(bot, update):
+    update.effective_message.reply_text("ole-ole-ole-ole!")
 def echo(bot, update):
     update.effective_message.reply_text(update.effective_message.text)
 
@@ -36,6 +37,7 @@ if __name__ == "__main__":
     # Add handlers
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler('go', go))
+    dp.add_handler(CommandHandler('league', league))
     dp.add_handler(MessageHandler(Filters.text, echo))
     #dp.add_handler(error)
 
