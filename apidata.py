@@ -15,20 +15,20 @@ matplotlib.use('pdf')
 import matplotlib.pyplot as plt
 import six
 
-def getdata(url):
-    r=requests.get(url, headers={'X-Auth-Token': key})
-    response=r.json()
-    return response
+'''def getdata(url):
+	r=requests.get(url, headers={'X-Auth-Token': key})
+	response=r.json()
+	return response
 def check_W(a,b):
-    if a>b:
-        return 1
-    else:
-        return 0
+	if a>b:
+		return 1
+	else:
+		return 0
 def check_L(a,b):
-    if a<b:
-        return 1
-    else:
-        return 0
+	if a<b:
+		return 1
+	else:
+		return 0
 def check_D(a,b):
     if a==b:
         return 1
@@ -288,7 +288,7 @@ def mainfunc(team1,team2,league):
         z+=1
     render_mpl_table(export_pd, header_columns=0, col_width=4.0)
 
-    return output
+    return output'''
 key='644aa8f8c2e74a0d8a30523677bfa6de'
 
 def getallleague():
@@ -299,7 +299,7 @@ def getallleague():
 	output=output+'\n'+x['caption']
     return output
 
-def allcomands(need):
+'''def allcomands(need):
 	print need
 	r=requests.get("http://api.football-data.org/v1/competitions", headers={'X-Auth-Token': key})
 	response=r.json()
@@ -313,4 +313,4 @@ def allcomands(need):
 	output=''
 	for x in response['teams']:
 		output=output+'\n'+x['name']
-	return output
+	return output'''
