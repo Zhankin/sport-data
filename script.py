@@ -1,14 +1,14 @@
 import telebot
 import cherrypy
-import config
 
-WEBHOOK_HOST = '81.211.150.237'
-WEBHOOK_PORT = 443
+token='510800243:AAEsmyadUWf8h6VL4YV0HbjXtvuYVLRNpFQ'
+WEBHOOK_HOST = 'https://zhankin-test3.herokuapp.com'
+WEBHOOK_PORT = int(os.environ.get('PORT'))
 WEBHOOK_LISTEN = '0.0.0.0'
-WEBHOOK_SSL_CERT = './webhook_cert.pem'
-WEBHOOK_SSL_PRIV = './webhook_pkey.pem'
+#WEBHOOK_SSL_CERT = './webhook_cert.pem'
+#WEBHOOK_SSL_PRIV = './webhook_pkey.pem'
 WEBHOOK_URL_BASE = "https://%s:%s" % (WEBHOOK_HOST, WEBHOOK_PORT)
-WEBHOOK_URL_PATH = "/%s/" % (config.token)
+WEBHOOK_URL_PATH = "/%s/" % (token)
 
 bot = telebot.TeleBot(config.token)
 
@@ -38,10 +38,7 @@ bot.remove_webhook()
 
 cherrypy.config.update({
     'server.socket_host': WEBHOOK_LISTEN,
-    'server.socket_port': WEBHOOK_PORT,
-    'server.ssl_module': 'builtin',
-    'server.ssl_certificate': WEBHOOK_SSL_CERT,
-    'server.ssl_private_key': WEBHOOK_SSL_PRIV
+    'server.socket_port': WEBHOOK_PORT
 })
 
 
