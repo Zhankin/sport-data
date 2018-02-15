@@ -299,7 +299,6 @@ def getallleague():
 	return output
 
 def allcomands(need):
-	print need
 	r=requests.get("http://api.football-data.org/v1/competitions", headers={'X-Auth-Token': key})
 	response=r.json()
 	for x in response:
