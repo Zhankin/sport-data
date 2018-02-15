@@ -193,7 +193,7 @@ def byteam(team,need_id,data):
 				if y['status']=='FINISHED':
 					if y['_links']['competition']['href']=='http://api.football-data.org/v1/competitions/'+need_id:
 						#if y['result'].has_key('halfTime')==True:
-						if 'halfTime' not in y['result']:
+						if 'halfTime' in y['result']:
 							if y['homeTeamName']==team:
 							    data.loc[z]=[y['date'],y['homeTeamName'],y['awayTeamName'],'home',y['result']['goalsHomeTeam'],y['result']['goalsAwayTeam'],y['result']['halfTime']['goalsHomeTeam'],y['result']['halfTime']['goalsAwayTeam']]
 							else:
