@@ -17,11 +17,11 @@ def error(bot, update, error):
 
 if __name__ == "__main__":
     # Set these variable to the appropriate values
-    TOKEN = "Your token from @Botfather"
-    NAME = "The name of your app on Heroku"
+    TOKEN = "510800243:AAEsmyadUWf8h6VL4YV0HbjXtvuYVLRNpFQ"
+    NAME = "zhankin-test3"
 
     # Port is given by Heroku
-    PORT = os.environ.get('PORT')
+    PORT = int(os.environ.get('PORT'))
 
     # Enable logging
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
