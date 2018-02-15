@@ -32,7 +32,7 @@ def echo_message(message):
 
 
 bot.remove_webhook()
-bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH)
+bot.set_webhook(url='https://zhankin-test3.herokuapp.com/510800243:AAEsmyadUWf8h6VL4YV0HbjXtvuYVLRNpFQ')
 
 
 cherrypy.config.update({
