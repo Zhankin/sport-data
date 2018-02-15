@@ -10,11 +10,21 @@ def go(bot, update):
 	update.effective_message.reply_text("go!")
 def league(bot, update):
 	update.effective_message.reply_text(apidata.getallleague())
+def league_new(bot, update):
+    reply_keyboard = apidata.getallleague_ls()
+    markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
+    update.message.reply_text(
+        "Please select league:",
+        reply_markup=markup)
+
 def echo(bot, update):
+	league_ls=apidata.getallleague_ls2()
 	if update.effective_message.text[0]=='!':
 		update.effective_message.reply_text(apidata.allcomands(update.effective_message.text[1:]))
 	elif update.effective_message.text=='league':
 		update.effective_message.reply_text(apidata.getallleague())
+	elif update.effective_message.text in league_ls:
+		update.effective_message.reply_text(apidata.allcommands(update.effective_message.text))
 	else:
 		try:
 			txt=update.effective_message.text
@@ -48,6 +58,7 @@ if __name__ == "__main__":
 	dp.add_handler(CommandHandler('start', start))
 	dp.add_handler(CommandHandler('go', go))
 	dp.add_handler(CommandHandler('league', league))
+	dp.add_handler(CommandHandler('league_new', league_new))
 	dp.add_handler(MessageHandler(Filters.text, echo))
 	#dp.add_handler(error)
 
