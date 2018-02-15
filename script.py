@@ -10,7 +10,7 @@ WEBHOOK_LISTEN = '0.0.0.0'
 WEBHOOK_URL_BASE = "https://%s:%s" % (WEBHOOK_HOST, WEBHOOK_PORT)
 WEBHOOK_URL_PATH = "/%s/" % (token)
 
-bot = telebot.TeleBot(config.token)
+bot = telebot.TeleBot(token)
 
 class WebhookServer(object):
     @cherrypy.expose
