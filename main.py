@@ -16,8 +16,7 @@ def echo(bot, update):
     if update.effective_message.text[0]=='!':
         update.effective_message.reply_text(apidata.allcomands(update.effective_message.text[1:]))
     else:
-        #try:
-	txt=message.text
+	txt=update.effective_message.text
 	txt=txt.split("%")
 	output=apidata.mainfunc(txt[0],txt[1],txt[2])
 	#print str(message.chat.id)
