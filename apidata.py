@@ -190,14 +190,14 @@ def byteam(team,need_id,data):
 			fix=getdata(fix)
 			z=0
 			for y in fix['fixtures']:
-			if y['status']=='FINISHED':
-				if y['_links']['competition']['href']=='http://api.football-data.org/v1/competitions/'+need_id:
-					if y['result'].has_key('halfTime')==True:
-						if y['homeTeamName']==team:
-						    data.loc[z]=[y['date'],y['homeTeamName'],y['awayTeamName'],'home',y['result']['goalsHomeTeam'],y['result']['goalsAwayTeam'],y['result']['halfTime']['goalsHomeTeam'],y['result']['halfTime']['goalsAwayTeam']]
-						else:
-						    data.loc[z]=[y['date'],y['awayTeamName'],y['homeTeamName'],'away',y['result']['goalsAwayTeam'],y['result']['goalsHomeTeam'],y['result']['halfTime']['goalsAwayTeam'],y['result']['halfTime']['goalsHomeTeam']]    
-						z+=1
+				if y['status']=='FINISHED':
+					if y['_links']['competition']['href']=='http://api.football-data.org/v1/competitions/'+need_id:
+						if y['result'].has_key('halfTime')==True:
+							if y['homeTeamName']==team:
+							    data.loc[z]=[y['date'],y['homeTeamName'],y['awayTeamName'],'home',y['result']['goalsHomeTeam'],y['result']['goalsAwayTeam'],y['result']['halfTime']['goalsHomeTeam'],y['result']['halfTime']['goalsAwayTeam']]
+							else:
+							    data.loc[z]=[y['date'],y['awayTeamName'],y['homeTeamName'],'away',y['result']['goalsAwayTeam'],y['result']['goalsHomeTeam'],y['result']['halfTime']['goalsAwayTeam'],y['result']['halfTime']['goalsHomeTeam']]    
+							z+=1
                 
 			break
 	return data
