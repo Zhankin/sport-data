@@ -14,7 +14,7 @@ def league(bot, update):
     update.effective_message.reply_text(apidata.getallleague())
 def echo(bot, update):
     if update.effective_message.text[0]=='!':
-        update.effective_message.reply_text(apidata.allcomands(effective_message.reply_text[1:]))
+        update.effective_message.reply_text(apidata.allcomands(update.effective_message.reply_text[1:]))
     else:
         update.effective_message.reply_text(update.effective_message.text)
 
