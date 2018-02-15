@@ -13,19 +13,16 @@ def league(bot, update):
 def echo(bot, update):
 	if update.effective_message.text[0]=='!':
 		update.effective_message.reply_text(apidata.allcomands(update.effective_message.text[1:]))
+	elif: update.effective_message.text=='league':
+		update.effective_message.reply_text(apidata.getallleague())
 	else:
-		txt=update.effective_message.text
-		txt=txt.split("%")
-		output=apidata.mainfunc(txt[0],txt[1],txt[2])
-		#print str(message.chat.id)
-		#bot.send_message(message.chat.id,output)
-		update.effective_message.reply_photo(photo=open('test.png','rb'))
-
-		#bot.send_photo(message.chat.id,photo=open('test.png','rb'))
-
-		#except:
-		#continue
-		#update.effective_message.reply_text('Ola-la')
+		try:
+			txt=update.effective_message.text
+			txt=txt.split("%")
+			output=apidata.mainfunc(txt[0],txt[1],txt[2])
+			update.effective_message.reply_photo(photo=open('test.png','rb'))
+		except:
+			update.effective_message.reply_text('Ola-la')
             
 def error(bot, update, error):
 	logger.warning('Update "%s" caused error "%s"', update, error)
