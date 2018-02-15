@@ -1,2 +1,1 @@
-pyTelegramBotAPI
-cherrypy
+python-telegram-bot
