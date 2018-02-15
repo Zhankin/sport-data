@@ -13,7 +13,7 @@ def league(bot, update):
 def echo(bot, update):
 	if update.effective_message.text[0]=='!':
 		update.effective_message.reply_text(apidata.allcomands(update.effective_message.text[1:]))
-	elif: update.effective_message.text=='league':
+	elif update.effective_message.text=='league':
 		update.effective_message.reply_text(apidata.getallleague())
 	else:
 		try:
