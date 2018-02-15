@@ -13,7 +13,10 @@ def league(bot, update):
     
     update.effective_message.reply_text(apidata.getallleague())
 def echo(bot, update):
-    update.effective_message.reply_text(update.effective_message.text)
+    if update.effective_message.text[0]=='!':
+        update.effective_message.reply_text(apidata.allcomands(effective_message.reply_text[1:]))
+    else:
+        update.effective_message.reply_text(update.effective_message.text)
 
 def error(bot, update, error):
     logger.warning('Update "%s" caused error "%s"', update, error)
