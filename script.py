@@ -26,6 +26,10 @@ class WebhookServer(object):
         else:
             raise cherrypy.HTTPError(403)
 
+@bot.message_handler(commands=['All'])
+def game(message):
+                bot.send_message(message.chat.id, 'ola-la problems with the calculation')
+        
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def echo_message(message):
     bot.reply_to(message.chat.id, message.text)
