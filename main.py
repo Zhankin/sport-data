@@ -25,7 +25,7 @@ def echo(bot, update):
 	elif update.effective_message.text=='league':
 		update.effective_message.reply_text(apidata.getallleague())
 	elif update.effective_message.text in league_ls:
-		update.effective_message.reply_text(apidata.allcommands(update.effective_message.text))
+		update.effective_message.reply_text(apidata.allcomands(update.effective_message.text))
 	else:
 		try:
 			txt=update.effective_message.text
