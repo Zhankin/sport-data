@@ -136,7 +136,6 @@ def render_mpl_table(data, col_width=10.0, row_height=0.625, font_size=14,
 
 
 def addcolumn(data,stadium):
-    #def applydata(data):
     data['time_2_goals_Team1']=data.apply(lambda row: row.Goals_Team1-row.time_1_goals_Team1, axis=1)
     data['time_2_goals_Team2']=data.apply(lambda row: row.Goals_Team2-row.time_1_goals_Team2, axis=1)
     
@@ -177,46 +176,9 @@ def addcolumn(data,stadium):
     data['Team 2 Total 1T>2T']=data.apply(lambda row: check_I1B2(row.time_1_goals_Team2,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
     data['Team 2 Total 2T>2T']=data.apply(lambda row: check_I2B1(row.time_1_goals_Team2,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
     data['Team 2 Total 1T=2T']=data.apply(lambda row: check_I1D2(row.time_1_goals_Team2,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
-    #return data
     
-    #data=applydata(data)
     data2 = data[data.Home_Away == stadium].copy()
-    #data2=applydata(data2)
-    '''data2['time_2_goals_Team1']=data2.apply(lambda row: row.Goals_Team1-row.time_1_goals_Team1, axis=1)
-    data2['time_2_goals_Team2']=data2.apply(lambda row: row.Goals_Team2-row.time_1_goals_Team2, axis=1)
     
-    data2['Win']=data2.apply(lambda row: check_W(row.Goals_Team1,row.Goals_Team2), axis=1)
-    data2['Loss']=data2.apply(lambda row: check_L(row.Goals_Team1,row.Goals_Team2), axis=1)
-    data2['Draw']=data2.apply(lambda row: check_D(row.Goals_Team1,row.Goals_Team2), axis=1)
-    data2['1X']=data2.apply(lambda row: check_1X(row.Goals_Team1,row.Goals_Team2), axis=1)
-    data2['X2']=data2.apply(lambda row: check_X2(row.Goals_Team1,row.Goals_Team2), axis=1)
-    
-    data2['Total 1.5']=data2.apply(lambda row: check_TB15(row.Goals_Team1,row.Goals_Team2), axis=1)
-    data2['Total 2.5']=data2.apply(lambda row: check_TB25(row.Goals_Team1,row.Goals_Team2), axis=1)
-    data2['Total 3.5']=data2.apply(lambda row: check_TB35(row.Goals_Team1,row.Goals_Team2), axis=1)
-    
-    data2['Total 1-time 0.5']=data2.apply(lambda row: check_1TB05(row.time_1_goals_Team1,row.time_1_goals_Team2), axis=1)
-    data2['Total 1-time 1.5']=data2.apply(lambda row: check_1TB15(row.time_1_goals_Team1,row.time_1_goals_Team2), axis=1)
-    data2['Total 1-time individual 0.5']=data2.apply(lambda row: check_1ITB05(row.time_1_goals_Team1,row.time_1_goals_Team2), axis=1)
-    data2['Total 1-time individual 1.5']=data2.apply(lambda row: check_1ITB15(row.time_1_goals_Team1,row.time_1_goals_Team2), axis=1)
-    
-    data2['Total 2-time 0.5']=data2.apply(lambda row: check_1TB05(row.Goals_Team1-row.time_1_goals_Team1,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
-    data2['Total 2-time 1.5']=data2.apply(lambda row: check_1TB15(row.Goals_Team1-row.time_1_goals_Team1,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
-    data2['Total 2-time individual 0.5']=data2.apply(lambda row: check_1ITB05(row.Goals_Team1-row.time_1_goals_Team1,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
-    data2['Total 2-time individual 1.5']=data2.apply(lambda row: check_1ITB15(row.Goals_Team1-row.time_1_goals_Team1,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
-    
-    data2['Total 1-time>Total 2-time']=data2.apply(lambda row: check_1B2(row.time_1_goals_Team1,row.time_1_goals_Team2,row.Goals_Team1-row.time_1_goals_Team1,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
-    data2['Total 2-time>Total 1-time']=data2.apply(lambda row: check_2B1(row.time_1_goals_Team1,row.time_1_goals_Team2,row.Goals_Team1-row.time_1_goals_Team1,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
-    data2['Total 1-time=Total 2-time']=data2.apply(lambda row: check_1D1(row.time_1_goals_Team1,row.time_1_goals_Team2,row.Goals_Team1-row.time_1_goals_Team1,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
-
-    data2['Team 1 Individual Total 1-time>Total 2-time']=data2.apply(lambda row: check_I1B2(row.time_1_goals_Team1,row.Goals_Team1-row.time_1_goals_Team1), axis=1)
-    data2['Team 1 Individual Total 2-time>Total 1-time']=data2.apply(lambda row: check_I2B1(row.time_1_goals_Team1,row.Goals_Team1-row.time_1_goals_Team1), axis=1)
-    data2['Team 1 Individual Total 1-time=Total 2-time']=data2.apply(lambda row: check_I1D2(row.time_1_goals_Team1,row.Goals_Team1-row.time_1_goals_Team1), axis=1)
-
-    
-    data2['Team 2 Individual Total 1-time>Total 2-time']=data2.apply(lambda row: check_I1B2(row.time_1_goals_Team2,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
-    data2['Team 2 Individual Total 2-time>Total 1-time']=data2.apply(lambda row: check_I2B1(row.time_1_goals_Team2,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
-    data2['Team 2 Individual Total 1-time=Total 2-time']=data2.apply(lambda row: check_I1D2(row.time_1_goals_Team2,row.Goals_Team2-row.time_1_goals_Team2), axis=1)'''
     return data,data2
 
 def byteam(team,need_id,data):
@@ -248,47 +210,6 @@ def printdata_goals(a,b):
     return str(round(b.mean(),2))+' goals = '+a
 def printall(data):
     output='__________'
-    '''output=output+'\n'+printdata('Win',data['Win'])
-    output=output+'\n'+printdata('Loss',data['Loss'])
-    output=output+'\n'+printdata('Draw',data['Draw'])
-    output=output+'\n'+printdata('1X',data['1X'])
-    output=output+'\n'+printdata('X2',data['X2'])
-    output=output+'\n'+printdata('Total 1.5',data['Total 1.5'])
-    output=output+'\n'+printdata('Total 2.5',data['Total 2.5'])
-    output=output+'\n'+printdata('Total 3.5',data['Total 3.5'])
-    
-    output=output+'\n'+printdata('Total 1-time 0.5',data['Total 1-time 0.5'])
-    output=output+'\n'+printdata('Total 1-time 1.5',data['Total 1-time 1.5'])
-    output=output+'\n'+printdata('Total 1-time individual 0.5',data['Total 1-time individual 0.5'])
-    output=output+'\n'+printdata('Total 1-time individual 1.5',data['Total 1-time individual 1.5'])
-    
-    output=output+'\n'+printdata('Total 2-time 0.5',data['Total 2-time 0.5'])
-    output=output+'\n'+printdata('Total 2-time 1.5',data['Total 2-time 1.5'])
-    output=output+'\n'+printdata('Total 2-time individual 0.5',data['Total 2-time individual 0.5'])
-    output=output+'\n'+printdata('Total 2-time individual 1.5',data['Total 2-time individual 1.5'])
-    
-    output=output+'\n'+printdata('Total 1-time>Total 2-time',data['Total 1-time>Total 2-time'])
-    output=output+'\n'+printdata('Total 2-time>Total 1-time',data['Total 2-time>Total 1-time'])
-    output=output+'\n'+printdata('Total 1-time=Total 2-time',data['Total 1-time=Total 2-time'])
-    
-
-    output=output+'\n'+printdata('Team 1 Individual Total 1-time>Total 2-time',data['Team 1 Individual Total 1-time>Total 2-time'])
-    output=output+'\n'+printdata('Team 1 Individual Total 2-time>Total 1-time',data['Team 1 Individual Total 2-time>Total 1-time'])
-    
-    output=output+'\n'+printdata('Team 2 Individual Total 1-time>Total 2-time',data['Team 2 Individual Total 1-time>Total 2-time'])
-    output=output+'\n'+printdata('Team 2 Individual Total 2-time>Total 1-time',data['Team 2 Individual Total 2-time>Total 1-time'])
-    
-    
-    output=output+'\n'+printdata_goals('Mean Individual Goal Team 1',data['Goals_Team1'])
-    output=output+'\n'+printdata_goals('Mean Individual Goal 1-time Team 1',data['time_1_goals_Team1'])
-    output=output+'\n'+printdata_goals('Mean Individual Goal 2-time Team 1',data['time_2_goals_Team1'])
-    
-    output=output+'\n'+printdata_goals('Mean Individual Goal Team 2',data['Goals_Team2'])
-    output=output+'\n'+printdata_goals('Mean Individual Goal 1-time Team 2',data['time_1_goals_Team2'])
-    output=output+'\n'+printdata_goals('Mean Individual Goal 2-time Team 2',data['time_2_goals_Team2'])'''
-    
-    #ls_name_export=['Win','Loss','Draw','1X','X2','Total 1.5','Total 2.5','Total 3.5','Total 1T 0.5','Total 1T 1.5','Total 1-time individual 0.5','Total 1-time individual 1.5','Total 2-time 0.5','Total 2-time 1.5','Total 2-time individual 0.5','Total 2-time individual 1.5','Total 1-time>Total 2-time','Total 2-time>Total 1-time','Total 1-time=Total 2-time','Team 1 Individual Total 1-time>Total 2-time','Team 1 Individual Total 2-time>Total 1-time','Team 2 Individual Total 1-time>Total 2-time','Team 2 Individual Total 2-time>Total 1-time']
-    #ls_name_data=['Win','Loss','Draw','1X','X2','Total 1.5','Total 2.5','Total 3.5','Total 1-time 0.5','Total 1-time 1.5','Total 1-time individual 0.5','Total 1-time individual 1.5','Total 2-time 0.5','Total 2-time 1.5','Total 2-time individual 0.5','Total 2-time individual 1.5','Total 1-time>Total 2-time','Total 2-time>Total 1-time','Total 1-time=Total 2-time','Team 1 Individual Total 1-time>Total 2-time','Team 1 Individual Total 2-time>Total 1-time','Team 2 Individual Total 1-time>Total 2-time','Team 2 Individual Total 2-time>Total 1-time']
     ls_name_export=['Win','Loss','Draw','1X','X2',
 'Total 1.5','Total 2.5','Total 3.5',
 'Total 1T 0.5','Total 1T 1.5','Total 2T 0.5','Total 2T 1.5',
@@ -297,7 +218,6 @@ def printall(data):
 'Team2 Total 1T 0.5','Team2 Total 1T 1.5','Team2 Total 2T 0.5','Team2 Total 2T 1.5',
 'Team 1 Total 1T>2T','Team 1 Total 2T>1T','Team 1 Total 1T=2T',
 'Team 2 Total 1T>2T','Team 2 Total 2T>2T','Team 2 Total 1T=2T']
-    #ls_name_data=['Win','Loss','Draw','1X','X2','-','Total 1.5','Total 2.5','Total 3.5','Total 1T 0.5','Total 1T 1.5','Total 2T 0.5','Total 2T 1.5','Total 1T>2T','Total 2T>1T','Total 1T=2T','-','Team1 Total 1T 0.5','Team1 Total 1T 1.5','Team1 Total 2T 0.5','Team1 Total 2T 1.5','-','Team2 Total 1T 0.5','Team2 Total 1T 1.5','Team2 Total 2T 0.5','Team2 Total 2T 1.5','Team 1 Total 1T>2T','Team 1 Total 2T>1T','Team 1 Total 1T=2T','Team 2 Total 1T>2T','Team 2 Total 2T>2T','Team 2 Total 1T=2T']
     ls_name_data=['Win','Loss','Draw','1X','X2',
 'Total 1.5','Total 2.5','Total 3.5',
 'Total 1T 0.5','Total 1T 1.5','Total 2T 0.5','Total 2T 1.5',
@@ -320,15 +240,7 @@ def getleague(need):
     for x in response:
         if x['caption']==need:
             return x['id']
-
-#def getshortname(team1,team2,need_id):
-#    r=requests.get("http://api.football-data.org/v1/competitions/"+need_id+"/teams", headers={'X-Auth-Token': key})
-#    response=r.json()
-#    for x in response['teams']:
-#        if x['caption']==need:
-#            return x['id']
-
-            
+           
 def mainfunc(team1,team2,league):
     need_id=str(getleague(league))
 	
@@ -357,9 +269,6 @@ def mainfunc(team1,team2,league):
     output=output+'\n'+output_4
 
     export_pd=pd.DataFrame(columns=['Bet',team1+' all matches',team1+' home matches',team2+' all matches',team2+' away matches'])
-    #ls_name_export=['Win','Loss','Draw','1X','X2','Total 1.5','Total 2.5','Total 3.5','Total 1T 0.5','Total 1T 1.5','Ind. Total 1T 0.5','Ind. Total 1T 1.5','Total 2T 0.5','Total 2T 1.5','Ind. Total 2T 0.5','Ind. Total 2T 1.5','Total 1T>2T','Total 2T>1T','Total 1T=2T','Ind. Team 1 Total 1T>2T','Ind. Team 1 Total 2T>1T','Ind. Team 2 Total 1T>2T','Ind. Team 2 Total 2T>1T']
-    #ls_name_export=['Win','Loss','Draw','1X','X2','Total 1.5','Total 2.5','Total 3.5','Total 1T 0.5','Total 1T 1.5','Total 2T 0.5','Total 2T 1.5','Total 1T>2T','Total 2T>1T','Total 1T=2T','-','Team1 Total 1T 0.5','Team1 Total 1T 1.5','Team1 Total 2T 0.5','Team1 Total 2T 1.5','-','Team2 Total 1T 0.5','Team2 Total 1T 1.5','Team2 Total 2T 0.5','Team2 Total 2T 1.5','Team 1 Total 1T>2T','Team 1 Total 2T>1T','Team 1 Total 1T=2T','Team 2 Total 1T>2T','Team 2 Total 2T>2T','Team 2 Total 1T=2T']
-    #ls_name_data=['Win','Loss','Draw']
     ls_name_export=['Win','Loss','Draw','1X','X2','-',
 'Total 1.5','Total 2.5','Total 3.5','-',
 'Total 1T 0.5','Total 1T 1.5','Total 2T 0.5','Total 2T 1.5','-',
@@ -377,9 +286,6 @@ def mainfunc(team1,team2,league):
 	        export_pd.loc[z]=[x,ls_for_export_1[z1],ls_for_export_2[z1],ls_for_export_3[z1],ls_for_export_4[z1]]
 		z1+=1
         z+=1
-    #print export_pd
-    #export_pd.to_html('export.html')
-    #subprocess.call('wkhtmltoimage -f png --width 0 export.html table.png', shell=True)
     render_mpl_table(export_pd, header_columns=0, col_width=4.0)
 
     return output
@@ -408,11 +314,3 @@ def allcomands(need):
 	for x in response['teams']:
 		output=output+'\n'+x['name']
 	return output
-
-#mainfunc('Chelsea FC','West Bromwich Albion FC','Premier League 2017/18')
-
-#data.head(100)
-#data.to_excel('/samba/allaccess/score_chelsea.xlsx')
-#data.to_excel('/samba/allaccess/score_west.xlsx')
-        
-
