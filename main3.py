@@ -20,10 +20,7 @@ def facts_to_str(user_data):
 def start(bot, update):
 	reply_keyboard = apidata.getallleague_ls()
     	markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
-    	update.message.reply_text(
-        "Choose your destiny!",
-        reply_markup=markup)
-
+    	update.message.reply_text("Choose your destiny!",reply_markup=markup)
     	return CHOOSING_LEAGUE
 
 def teams_list(bot, update,user_data):
@@ -32,9 +29,7 @@ def teams_list(bot, update,user_data):
 
 	reply_keyboard = apidata.allcomands_ls(text)
 	markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
-    	update.message.reply_text(
-        "Choose your destiny!",
-        reply_markup=markup)
+    	update.message.reply_text("Choose your destiny!",reply_markup=markup)
     
     	return TYPING_REPLY_1TEAM
 
