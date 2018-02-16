@@ -49,7 +49,7 @@ def final_message(bot, update, user_data):
 	text = update.message.text
 	user_data['team_away'] = text
 	
-	output=apidata.mainfunc(user_data['league'],user_data['team_home'],user_data['team_away'])
+	output=apidata.mainfunc(user_data['team_home'],user_data['team_away'],user_data['league'])
 	update.effective_message.reply_photo(photo=open('test.png','rb'))
 	user_data.clear()
 	return ConversationHandler.END
