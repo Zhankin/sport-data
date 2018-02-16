@@ -5,7 +5,7 @@ from telegram import ReplyKeyboardMarkup
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, RegexHandler,
                           ConversationHandler)
 
-CHOOSING_LEAGUE,CHOOSING_HOME_TEAM, CHOOSING_AWAY_TEAM, FINAL = range(4)
+CHOOSING_HOME_TEAM, CHOOSING_AWAY_TEAM, FINAL = range(3)
 
 
 def facts_to_str(user_data):
@@ -18,15 +18,6 @@ def facts_to_str(user_data):
 
 
 def start(bot, update):
-	try:
-		reply_keyboard = apidata.getallleague_ls()
-		markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
-		update.message.reply_text("Choose your destiny!",reply_markup=markup)
-		return CHOOSING_HOME_TEAM
-	except:
-		update.message.reply_text("Please try again from /start")
-		return FINAL
-def go_back(bot):
 	try:
 		reply_keyboard = apidata.getallleague_ls()
 		markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
@@ -66,7 +57,14 @@ def team_away(bot, update, user_data):
 			return FINAL
 		else:
 			update.message.reply_text("Return to main menu")
-			return CHOOSING_LEAGUE
+			try:
+				reply_keyboard = apidata.getallleague_ls()
+				markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
+				update.message.reply_text("Choose your destiny!",reply_markup=markup)
+				return CHOOSING_HOME_TEAM
+			except:
+				update.message.reply_text("Please try again from /start")
+				return FINAL
 	except:
 		update.message.reply_text("pfff something broken try again from /start")
 		return FINAL
@@ -84,7 +82,14 @@ def final_message(bot, update, user_data):
 			return ConversationHandler.END
 		else:
 			update.message.reply_text("Return to main menu")
-			return CHOOSING_LEAGUE
+			try:
+				reply_keyboard = apidata.getallleague_ls()
+				markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
+				update.message.reply_text("Choose your destiny!",reply_markup=markup)
+				return CHOOSING_HOME_TEAM
+			except:
+				update.message.reply_text("Please try again from /start")
+				return FINAL
 	except:
 		user_data.clear()
 		update.message.reply_text("bye-bye")
@@ -124,9 +129,6 @@ if __name__ == "__main__":
         entry_points=[CommandHandler('start', start)],
 
         states={
-            CHOOSING_LEAGUE: [MessageHandler(Filters.text,
-                                          go_back),
-                           ],
             CHOOSING_HOME_TEAM: [MessageHandler(Filters.text,
                                           team_home,
                                           pass_user_data=True),
