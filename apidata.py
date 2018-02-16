@@ -329,3 +329,20 @@ def allcomands(need):
 	for x in response['teams']:
 		output=output+'\n'+x['name']
 	return output
+
+def allcomands_ls(need):
+	r=requests.get("http://api.football-data.org/v1/competitions", headers={'X-Auth-Token': key})
+	response=r.json()
+	for x in response:
+		if x['caption']==need:
+			need_id=str(x['id'])
+			break
+
+	r=requests.get('http://api.football-data.org/v1/competitions/'+need_id+'/teams', headers={'X-Auth-Token': key})
+	response=r.json()
+	output2=[]
+	for x in response['teams']:
+		output=[]
+		output.append(x['name'])
+		output2.append(output)
+	return output2
