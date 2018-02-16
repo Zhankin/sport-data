@@ -5,7 +5,7 @@ from telegram import ReplyKeyboardMarkup
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, RegexHandler,
                           ConversationHandler)
 
-CHOOSING_LEAGUE, TYPING_REPLY_LEAGUE = range(2)
+CHOOSING_LEAGUE, TYPING_REPLY_1TEAM = range(2)
 
 
 def facts_to_str(user_data):
