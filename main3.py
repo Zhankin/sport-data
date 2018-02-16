@@ -65,7 +65,7 @@ def team_away(bot, update, user_data):
 
 			return FINAL
 		else:
-			update.message.reply_text("Return to the main menu")
+			update.message.reply_text("Return to main menu")
 			return CHOOSING_LEAGUE
 	except:
 		update.message.reply_text("pfff something broken try again from /start")
@@ -83,7 +83,7 @@ def final_message(bot, update, user_data):
 			user_data.clear()
 			return ConversationHandler.END
 		else:
-			update.message.reply_text("Return to the main menu")
+			update.message.reply_text("Return to main menu")
 			return CHOOSING_LEAGUE
 	except:
 		user_data.clear()
