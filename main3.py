@@ -19,24 +19,24 @@ def facts_to_str(user_data):
 
 def start(bot, update):
 	reply_keyboard = apidata.getallleague_ls()
-    markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
-    update.message.reply_text(
+    	markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
+    	update.message.reply_text(
         "Choose your destiny!",
         reply_markup=markup)
 
-    return CHOOSING_LEAGUE
+    	return CHOOSING_LEAGUE
 
 def teams_list(bot, update,user_data):
 	text = update.message.text
-    user_data['choice'] = text
+    	user_data['choice'] = text
 
 	reply_keyboard = apidata.allcomands_ls(text)
-    markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
-    update.message.reply_text(
+	markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
+    	update.message.reply_text(
         "Choose your destiny!",
         reply_markup=markup)
     
-    return TYPING_REPLY_1TEAM
+    	return TYPING_REPLY_1TEAM
 
 def team2_choise(bot, update, user_data):
     update.message.reply_text("okok")
