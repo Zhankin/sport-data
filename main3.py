@@ -28,7 +28,6 @@ def start(bot, update):
 		return FINAL
 def go_back(bot, update,user_data):
 	try:
-		text = update.message.text
 		reply_keyboard = apidata.getallleague_ls()
 		markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
 		update.message.reply_text("Choose your destiny!",reply_markup=markup)
