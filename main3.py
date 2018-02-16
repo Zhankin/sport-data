@@ -18,41 +18,59 @@ def facts_to_str(user_data):
 
 
 def start(bot, update):
-	reply_keyboard = apidata.getallleague_ls()
-	markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
-	update.message.reply_text("Choose your destiny!",reply_markup=markup)
-	
-	return CHOOSING_HOME_TEAM
+	try:
+		reply_keyboard = apidata.getallleague_ls()
+		markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
+		update.message.reply_text("Choose your destiny!",reply_markup=markup)
+		return CHOOSING_HOME_TEAM
+	except:
+		update.message.reply_text("Please try again from /start",reply_markup=markup)
+		return FINAL
 
 def team_home(bot, update,user_data):
-	text = update.message.text
-	user_data['league'] = text
-	
-	reply_keyboard = apidata.allcomands_ls(text)
-	markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
-	update.message.reply_text("Choose home team!",reply_markup=markup)
-	
-	return CHOOSING_AWAY_TEAM
+	try:
+		text = update.message.text
+		user_data['league'] = text
+
+		reply_keyboard = apidata.allcomands_ls(text)
+		markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
+		update.message.reply_text("Choose home team!",reply_markup=markup)
+
+		return CHOOSING_AWAY_TEAM
+	except:
+		update.message.reply_text("wow wow something broken try again from /start",reply_markup=markup)
+		return FINAL
+
+
 
 def team_away(bot, update, user_data):
-	text = update.message.text
-	user_data['team_home'] = text
-	
-	reply_keyboard = apidata.allcomands_ls(user_data['league'])
-	markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
-	update.message.reply_text("Choose away team!",reply_markup=markup)
-	
-	
-	return FINAL
+	try:
+		text = update.message.text
+		user_data['team_home'] = text
+
+		reply_keyboard = apidata.allcomands_ls(user_data['league'])
+		markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
+		update.message.reply_text("Choose away team!",reply_markup=markup)
+
+
+		return FINAL
+	except:
+		update.message.reply_text("pfff something broken try again from /start",reply_markup=markup)
+		return FINAL
+		
 
 def final_message(bot, update, user_data):
-	text = update.message.text
-	user_data['team_away'] = text
-	
-	output=apidata.mainfunc(user_data['team_home'],user_data['team_away'],user_data['league'])
-	update.effective_message.reply_photo(photo=open('test.png','rb'))
-	user_data.clear()
-	return ConversationHandler.END
+	try:
+		text = update.message.text
+		user_data['team_away'] = text
+
+		output=apidata.mainfunc(user_data['team_home'],user_data['team_away'],user_data['league'])
+		update.effective_message.reply_photo(photo=open('test.png','rb'))
+		user_data.clear()
+		return ConversationHandler.END
+	except:
+		user_data.clear()
+		return ConversationHandler.END
 	
 def done(bot, update, user_data):
     update.message.reply_text("Bye")
