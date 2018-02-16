@@ -5,7 +5,7 @@ from telegram import ReplyKeyboardMarkup
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, RegexHandler,
                           ConversationHandler)
 
-CHOOSING_HOME_TEAM, CHOOSING_AWAY_TEAM = range(2)
+CHOOSING_HOME_TEAM, CHOOSING_AWAY_TEAM, FINAL = range(3)
 
 
 def facts_to_str(user_data):
@@ -44,7 +44,7 @@ def team_away(bot, update, user_data):
 	
 	return FINAL
 
-def final(bot, update, user_data):
+def final_message(bot, update, user_data):
 	update.message.reply_text(user_data)
 	#return TYPING_REPLY_1TEAM
 
@@ -92,7 +92,7 @@ if __name__ == "__main__":
                                            pass_user_data=True),
                             ],
             FINAL: [MessageHandler(Filters.text,
-                                           final,
+                                           final_message,
                                            pass_user_data=True),
                             ],
 		
