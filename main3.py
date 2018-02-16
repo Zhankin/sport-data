@@ -24,7 +24,7 @@ def start(bot, update):
 		update.message.reply_text("Choose your destiny!",reply_markup=markup)
 		return CHOOSING_HOME_TEAM
 	except:
-		update.message.reply_text("Please try again from /start",reply_markup=markup)
+		update.message.reply_text("Please try again from /start")
 		return FINAL
 
 def team_home(bot, update,user_data):
@@ -38,7 +38,7 @@ def team_home(bot, update,user_data):
 
 		return CHOOSING_AWAY_TEAM
 	except:
-		update.message.reply_text("wow wow something broken try again from /start",reply_markup=markup)
+		update.message.reply_text("wow wow something broken try again from /start")
 		return FINAL
 
 
@@ -55,7 +55,7 @@ def team_away(bot, update, user_data):
 
 		return FINAL
 	except:
-		update.message.reply_text("pfff something broken try again from /start",reply_markup=markup)
+		update.message.reply_text("pfff something broken try again from /start")
 		return FINAL
 		
 
@@ -70,6 +70,7 @@ def final_message(bot, update, user_data):
 		return ConversationHandler.END
 	except:
 		user_data.clear()
+		update.message.reply_text("bye-bye")
 		return ConversationHandler.END
 	
 def done(bot, update, user_data):
