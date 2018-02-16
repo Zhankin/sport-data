@@ -32,15 +32,16 @@ def team_home(bot, update,user_data):
 	markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
 	update.message.reply_text("Choose home team!",reply_markup=markup)
 	
-	return FINAL
+	return CHOOSING_AWAY_TEAM
 
 def team_away(bot, update, user_data):
-	text = update.message.text
+	'''text = update.message.text
 	user_data['choice'] = text
 	
 	reply_keyboard = apidata.allcomands_ls(text)
 	markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
-	update.message.reply_text("Choose away team!",reply_markup=markup)
+	update.message.reply_text("Choose away team!",reply_markup=markup)'''
+	update.message.reply_text('Choose away team!')
 	
 	return FINAL
 
