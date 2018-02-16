@@ -5,7 +5,7 @@ from telegram import ReplyKeyboardMarkup
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, RegexHandler,
                           ConversationHandler)
 
-CHOOSING_HOME_TEAM, CHOOSING_AWAY_TEAM, FINAL = range(3)
+CHOOSING_LEAGUE,CHOOSING_HOME_TEAM, CHOOSING_AWAY_TEAM, FINAL = range(4)
 
 
 def facts_to_str(user_data):
@@ -46,28 +46,34 @@ def team_home(bot, update,user_data):
 def team_away(bot, update, user_data):
 	try:
 		text = update.message.text
-		user_data['team_home'] = text
+		if text!='Back to main menu':
+			user_data['team_home'] = text
 
-		reply_keyboard = apidata.allcomands_ls(user_data['league'])
-		markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
-		update.message.reply_text("Choose away team!",reply_markup=markup)
+			reply_keyboard = apidata.allcomands_ls(user_data['league'])
+			markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
+			update.message.reply_text("Choose away team!",reply_markup=markup)
 
 
-		return FINAL
+			return FINAL
+		else:
+			return CHOOSING_LEAGUE
 	except:
 		update.message.reply_text("pfff something broken try again from /start")
-		return FINAL
+		return CHOOSING_LEAGUE
 		
 
 def final_message(bot, update, user_data):
 	try:
 		text = update.message.text
-		user_data['team_away'] = text
+		if text!='Back to main menu':
+			user_data['team_away'] = text
 
-		output=apidata.mainfunc(user_data['team_home'],user_data['team_away'],user_data['league'])
-		update.effective_message.reply_photo(photo=open('test.png','rb'))
-		user_data.clear()
-		return ConversationHandler.END
+			output=apidata.mainfunc(user_data['team_home'],user_data['team_away'],user_data['league'])
+			update.effective_message.reply_photo(photo=open('test.png','rb'))
+			user_data.clear()
+			return ConversationHandler.END
+		else:
+			return CHOOSING_LEAGUE
 	except:
 		user_data.clear()
 		update.message.reply_text("bye-bye")
@@ -107,6 +113,10 @@ if __name__ == "__main__":
         entry_points=[CommandHandler('start', start)],
 
         states={
+            CHOOSING_LEAGUE: [MessageHandler(Filters.text,
+                                          start,
+                                          pass_user_data=True),
+                           ],
             CHOOSING_HOME_TEAM: [MessageHandler(Filters.text,
                                           team_home,
                                           pass_user_data=True),
