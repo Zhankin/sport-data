@@ -26,7 +26,17 @@ def start(bot, update):
 	except:
 		update.message.reply_text("Please try again from /start")
 		return FINAL
-
+def go_back(bot, update,user_data):
+	try:
+		text = update.message.text
+		reply_keyboard = apidata.getallleague_ls()
+		markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
+		update.message.reply_text("Choose your destiny!",reply_markup=markup)
+		return CHOOSING_HOME_TEAM
+	except:
+		update.message.reply_text("Please try again from /start")
+		return FINAL
+	
 def team_home(bot, update,user_data):
 	try:
 		text = update.message.text
@@ -116,7 +126,8 @@ if __name__ == "__main__":
 
         states={
             CHOOSING_LEAGUE: [MessageHandler(Filters.text,
-                                          start),
+                                          go_back,
+                                          pass_user_data=True),
                            ],
             CHOOSING_HOME_TEAM: [MessageHandler(Filters.text,
                                           team_home,
