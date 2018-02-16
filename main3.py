@@ -32,7 +32,7 @@ def team_home(bot, update,user_data):
 	markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
 	update.message.reply_text("Choose home team!",reply_markup=markup)
 	
-	return CHOOSING_AWAY_TEAM
+	return FINAL
 
 def team_away(bot, update, user_data):
 	text = update.message.text
