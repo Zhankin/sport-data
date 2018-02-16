@@ -88,7 +88,7 @@ if __name__ == "__main__":
                            ],
 
             CHOOSING_AWAY_TEAM: [MessageHandler(Filters.text,
-                                           team2_choise,
+                                           team_away,
                                            pass_user_data=True),
                             ],
             FINAL: [MessageHandler(Filters.text,
