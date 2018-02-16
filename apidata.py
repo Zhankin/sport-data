@@ -44,6 +44,7 @@ def check_X2(a,b):
 		return 1
 	else:
 		return 0
+#################################################
 def check_TB15(a,b):
 	if a+b>1.5:
 		return 1
@@ -110,6 +111,44 @@ def check_I1D2(a,b):
 	else:
 		return 0
 
+#################################################
+def check_TM15(a,b):
+	if a+b<1.5:
+		return 1
+	else:
+		return 0
+
+def check_TM25(a,b):
+	if a+b<2.5:
+		return 1
+	else:
+		return 0
+def check_TM35(a,b):
+	if a+b<3.5:
+		return 1
+	else:
+		return 0
+def check_1TM05(a,b):
+	if a+b<0.5:
+		return 1
+	else:
+		return 0
+def check_1TM15(a,b):
+	if a+b<1.5:
+		return 1
+	else:
+		return 0
+def check_1ITM05(a,b):
+	if a<0.5:
+		return 1
+	else:
+		return 0
+def check_1ITM15(a,b):
+	if a<1.5:
+		return 1
+	else:
+		return 0
+#################################################	
 def render_mpl_table(data, col_width=10.0, row_height=0.625, font_size=14,
                      header_color='#40466e', row_colors=['#f1f1f2', 'w'], edge_color='w',
                      bbox=[0, 0, 1, 1], header_columns=0,
@@ -145,29 +184,48 @@ def addcolumn(data,stadium):
 	data['1X']=data.apply(lambda row: check_1X(row.Goals_Team1,row.Goals_Team2), axis=1)
 	data['X2']=data.apply(lambda row: check_X2(row.Goals_Team1,row.Goals_Team2), axis=1)
 
-	data['Total 1.5']=data.apply(lambda row: check_TB15(row.Goals_Team1,row.Goals_Team2), axis=1)
-	data['Total 2.5']=data.apply(lambda row: check_TB25(row.Goals_Team1,row.Goals_Team2), axis=1)
-	data['Total 3.5']=data.apply(lambda row: check_TB35(row.Goals_Team1,row.Goals_Team2), axis=1)
-
-	data['Total 1T 0.5']=data.apply(lambda row: check_1TB05(row.time_1_goals_Team1,row.time_1_goals_Team2), axis=1)
-	data['Total 1T 1.5']=data.apply(lambda row: check_1TB15(row.time_1_goals_Team1,row.time_1_goals_Team2), axis=1)
-	data['Total 2T 0.5']=data.apply(lambda row: check_1TB05(row.Goals_Team1-row.time_1_goals_Team1,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
-	data['Total 2T 1.5']=data.apply(lambda row: check_1TB15(row.Goals_Team1-row.time_1_goals_Team1,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
+	data['Total>1.5']=data.apply(lambda row: check_TB15(row.Goals_Team1,row.Goals_Team2), axis=1)
+	data['Total>2.5']=data.apply(lambda row: check_TB25(row.Goals_Team1,row.Goals_Team2), axis=1)
+	data['Total>3.5']=data.apply(lambda row: check_TB35(row.Goals_Team1,row.Goals_Team2), axis=1)
+	
+	data['Total<1.5']=data.apply(lambda row: check_TM15(row.Goals_Team1,row.Goals_Team2), axis=1)
+	data['Total<2.5']=data.apply(lambda row: check_TM25(row.Goals_Team1,row.Goals_Team2), axis=1)
+	data['Total<3.5']=data.apply(lambda row: check_TM35(row.Goals_Team1,row.Goals_Team2), axis=1)
+	
+	data['Total 1T>0.5']=data.apply(lambda row: check_1TB05(row.time_1_goals_Team1,row.time_1_goals_Team2), axis=1)
+	data['Total 1T>1.5']=data.apply(lambda row: check_1TB15(row.time_1_goals_Team1,row.time_1_goals_Team2), axis=1)
+	data['Total 2T>0.5']=data.apply(lambda row: check_1TB05(row.Goals_Team1-row.time_1_goals_Team1,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
+	data['Total 2T>1.5']=data.apply(lambda row: check_1TB15(row.Goals_Team1-row.time_1_goals_Team1,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
+	
+	data['Total 1T<0.5']=data.apply(lambda row: check_1TM05(row.time_1_goals_Team1,row.time_1_goals_Team2), axis=1)
+	data['Total 1T<1.5']=data.apply(lambda row: check_1TM15(row.time_1_goals_Team1,row.time_1_goals_Team2), axis=1)
+	data['Total 2T<0.5']=data.apply(lambda row: check_1TM05(row.Goals_Team1-row.time_1_goals_Team1,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
+	data['Total 2T<1.5']=data.apply(lambda row: check_1TM15(row.Goals_Team1-row.time_1_goals_Team1,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
 
 	data['Total 1T>2T']=data.apply(lambda row: check_1B2(row.time_1_goals_Team1,row.time_1_goals_Team2,row.Goals_Team1-row.time_1_goals_Team1,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
 	data['Total 2T>1T']=data.apply(lambda row: check_2B1(row.time_1_goals_Team1,row.time_1_goals_Team2,row.Goals_Team1-row.time_1_goals_Team1,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
 	data['Total 1T=2T']=data.apply(lambda row: check_1D2(row.time_1_goals_Team1,row.time_1_goals_Team2,row.Goals_Team1-row.time_1_goals_Team1,row.Goals_Team2-row.time_1_goals_Team2), axis=1)    
 
 
-	data['Team1 Total 1T 0.5']=data.apply(lambda row: check_1ITB05(row.time_1_goals_Team1,0), axis=1)
-	data['Team1 Total 1T 1.5']=data.apply(lambda row: check_1ITB15(row.time_1_goals_Team1,0), axis=1)
-	data['Team1 Total 2T 0.5']=data.apply(lambda row: check_1ITB05(row.Goals_Team1-row.time_1_goals_Team1,0), axis=1)
-	data['Team1 Total 2T 1.5']=data.apply(lambda row: check_1ITB15(row.Goals_Team1-row.time_1_goals_Team1,0), axis=1)
+	data['Team1 Total 1T>0.5']=data.apply(lambda row: check_1ITB05(row.time_1_goals_Team1,0), axis=1)
+	data['Team1 Total 1T>1.5']=data.apply(lambda row: check_1ITB15(row.time_1_goals_Team1,0), axis=1)
+	data['Team1 Total 2T>0.5']=data.apply(lambda row: check_1ITB05(row.Goals_Team1-row.time_1_goals_Team1,0), axis=1)
+	data['Team1 Total 2T>1.5']=data.apply(lambda row: check_1ITB15(row.Goals_Team1-row.time_1_goals_Team1,0), axis=1)
+	
+	data['Team1 Total 1T<0.5']=data.apply(lambda row: check_1ITM05(row.time_1_goals_Team1,0), axis=1)
+	data['Team1 Total 1T<1.5']=data.apply(lambda row: check_1ITM15(row.time_1_goals_Team1,0), axis=1)
+	data['Team1 Total 2T<0.5']=data.apply(lambda row: check_1ITM05(row.Goals_Team1-row.time_1_goals_Team1,0), axis=1)
+	data['Team1 Total 2T<1.5']=data.apply(lambda row: check_1ITM15(row.Goals_Team1-row.time_1_goals_Team1,0), axis=1)
 
-	data['Team2 Total 1T 0.5']=data.apply(lambda row: check_1ITB05(row.time_1_goals_Team2,0), axis=1)
-	data['Team2 Total 1T 1.5']=data.apply(lambda row: check_1ITB15(row.time_1_goals_Team2,0), axis=1)
-	data['Team2 Total 2T 0.5']=data.apply(lambda row: check_1ITB05(row.Goals_Team2-row.time_1_goals_Team2,0), axis=1)
-	data['Team2 Total 2T 1.5']=data.apply(lambda row: check_1ITB15(row.Goals_Team2-row.time_1_goals_Team2,0), axis=1)
+	data['Team2 Total 1T>0.5']=data.apply(lambda row: check_1ITB05(row.time_1_goals_Team2,0), axis=1)
+	data['Team2 Total 1T>1.5']=data.apply(lambda row: check_1ITB15(row.time_1_goals_Team2,0), axis=1)
+	data['Team2 Total 2T>0.5']=data.apply(lambda row: check_1ITB05(row.Goals_Team2-row.time_1_goals_Team2,0), axis=1)
+	data['Team2 Total 2T>1.5']=data.apply(lambda row: check_1ITB15(row.Goals_Team2-row.time_1_goals_Team2,0), axis=1)
+	
+	data['Team2 Total 1T<0.5']=data.apply(lambda row: check_1ITM05(row.time_1_goals_Team2,0), axis=1)
+	data['Team2 Total 1T<1.5']=data.apply(lambda row: check_1ITM15(row.time_1_goals_Team2,0), axis=1)
+	data['Team2 Total 2T<0.5']=data.apply(lambda row: check_1ITM05(row.Goals_Team2-row.time_1_goals_Team2,0), axis=1)
+	data['Team2 Total 2T<1.5']=data.apply(lambda row: check_1ITM15(row.Goals_Team2-row.time_1_goals_Team2,0), axis=1)
 
 	data['Team 1 Total 1T>2T']=data.apply(lambda row: check_I1B2(row.time_1_goals_Team1,row.Goals_Team1-row.time_1_goals_Team1), axis=1)
 	data['Team 1 Total 2T>1T']=data.apply(lambda row: check_I2B1(row.time_1_goals_Team1,row.Goals_Team1-row.time_1_goals_Team1), axis=1)
@@ -177,6 +235,7 @@ def addcolumn(data,stadium):
 	data['Team 2 Total 2T>2T']=data.apply(lambda row: check_I2B1(row.time_1_goals_Team2,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
 	data['Team 2 Total 1T=2T']=data.apply(lambda row: check_I1D2(row.time_1_goals_Team2,row.Goals_Team2-row.time_1_goals_Team2), axis=1)
 
+	####################################################
 	data2 = data[data.Home_Away == stadium].copy()
 
 	return data,data2
@@ -212,21 +271,29 @@ def printdata_goals(a,b):
 def printall(data):
 	output='__________'
 	ls_name_export=['Win','Loss','Draw','1X','X2',
-'Total 1.5','Total 2.5','Total 3.5',
-'Total 1T 0.5','Total 1T 1.5','Total 2T 0.5','Total 2T 1.5',
+'Total>1.5','Total>2.5','Total>3.5',
+'Total<1.5','Total<2.5','Total<3.5',
+'Total 1T>0.5','Total 1T>1.5','Total 2T>0.5','Total 2T>1.5',
+'Total 1T<0.5','Total 1T<1.5','Total 2T<0.5','Total 2T<1.5',
 'Total 1T>2T','Total 2T>1T','Total 1T=2T',
-'Team1 Total 1T 0.5','Team1 Total 1T 1.5','Team1 Total 2T 0.5','Team1 Total 2T 1.5',
-'Team2 Total 1T 0.5','Team2 Total 1T 1.5','Team2 Total 2T 0.5','Team2 Total 2T 1.5',
+'Team1 Total 1T>0.5','Team1 Total 1T>1.5','Team1 Total 2T>0.5','Team1 Total 2T>1.5',
+'Team1 Total 1T<0.5','Team1 Total 1T<1.5','Team1 Total 2T<0.5','Team1 Total 2T<1.5',
+'Team2 Total 1T>0.5','Team2 Total 1T>1.5','Team2 Total 2T>0.5','Team2 Total 2T>1.5',
+'Team2 Total 1T<0.5','Team2 Total 1T<1.5','Team2 Total 2T<0.5','Team2 Total 2T<1.5',
 'Team 1 Total 1T>2T','Team 1 Total 2T>1T','Team 1 Total 1T=2T',
-'Team 2 Total 1T>2T','Team 2 Total 2T>2T','Team 2 Total 1T=2T']
+'Team 2 Total 1T>2T','Team 2 Total 2T>2T','Team 2 Total 1T=2T','Total<1.5']
 	ls_name_data=['Win','Loss','Draw','1X','X2',
-'Total 1.5','Total 2.5','Total 3.5',
-'Total 1T 0.5','Total 1T 1.5','Total 2T 0.5','Total 2T 1.5',
+'Total>1.5','Total>2.5','Total>3.5',
+'Total<1.5','Total<2.5','Total<3.5',
+'Total 1T>0.5','Total 1T>1.5','Total 2T>0.5','Total 2T>1.5',
+'Total 1T<0.5','Total 1T<1.5','Total 2T<0.5','Total 2T<1.5',
 'Total 1T>2T','Total 2T>1T','Total 1T=2T',
-'Team1 Total 1T 0.5','Team1 Total 1T 1.5','Team1 Total 2T 0.5','Team1 Total 2T 1.5',
-'Team2 Total 1T 0.5','Team2 Total 1T 1.5','Team2 Total 2T 0.5','Team2 Total 2T 1.5',
+'Team1 Total 1T>0.5','Team1 Total 1T>1.5','Team1 Total 2T>0.5','Team1 Total 2T>1.5',
+'Team1 Total 1T<0.5','Team1 Total 1T<1.5','Team1 Total 2T<0.5','Team1 Total 2T<1.5',
+'Team2 Total 1T>0.5','Team2 Total 1T>1.5','Team2 Total 2T>0.5','Team2 Total 2T>1.5',
+'Team2 Total 1T<0.5','Team2 Total 1T<1.5','Team2 Total 2T<0.5','Team2 Total 2T<1.5',
 'Team 1 Total 1T>2T','Team 1 Total 2T>1T','Team 1 Total 1T=2T',
-'Team 2 Total 1T>2T','Team 2 Total 2T>2T','Team 2 Total 1T=2T']
+'Team 2 Total 1T>2T','Team 2 Total 2T>2T','Team 2 Total 1T=2T','Total<1.5']
 	z=0
 	ls_for_export=[]
 	for x,y in zip(ls_name_export,ls_name_data):
@@ -271,13 +338,17 @@ def mainfunc(team1,team2,league):
 
 	export_pd=pd.DataFrame(columns=['Bet',team1+' all matches',team1+' home matches',team2+' all matches',team2+' away matches'])
 	ls_name_export=['Win','Loss','Draw','1X','X2','-',
-'Total 1.5','Total 2.5','Total 3.5','-',
-'Total 1T 0.5','Total 1T 1.5','Total 2T 0.5','Total 2T 1.5','-',
+'Total>1.5','Total>2.5','Total>3.5','-',
+'Total<1.5','Total<2.5','Total<3.5','-',
+'Total 1T>0.5','Total 1T>1.5','Total 2T>0.5','Total 2T>1.5','-',
+'Total 1T<0.5','Total 1T<1.5','Total 2T<0.5','Total 2T<1.5','-',
 'Total 1T>2T','Total 2T>1T','Total 1T=2T','-',
-'Team1 Total 1T 0.5','Team1 Total 1T 1.5','Team1 Total 2T 0.5','Team1 Total 2T 1.5','-',
-'Team2 Total 1T 0.5','Team2 Total 1T 1.5','Team2 Total 2T 0.5','Team2 Total 2T 1.5','-',
+'Team1 Total 1T>0.5','Team1 Total 1T>1.5','Team1 Total 2T>0.5','Team1 Total 2T>1.5','-',
+'Team1 Total 1T<0.5','Team1 Total 1T<1.5','Team1 Total 2T<0.5','Team1 Total 2T<1.5','-',
+'Team2 Total 1T>0.5','Team2 Total 1T>1.5','Team2 Total 2T>0.5','Team2 Total 2T>1.5','-',
+'Team2 Total 1T<0.5','Team2 Total 1T<1.5','Team2 Total 2T<0.5','Team2 Total 2T<1.5','-',
 'Team 1 Total 1T>2T','Team 1 Total 2T>1T','Team 1 Total 1T=2T','-',
-'Team 2 Total 1T>2T','Team 2 Total 2T>2T','Team 2 Total 1T=2T']
+'Team 2 Total 1T>2T','Team 2 Total 2T>2T','Team 2 Total 1T=2T','Total<1.5']
 	z=0
 	z1=0
 	for x in ls_name_export:
