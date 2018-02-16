@@ -114,8 +114,7 @@ if __name__ == "__main__":
 
         states={
             CHOOSING_LEAGUE: [MessageHandler(Filters.text,
-                                          start,
-                                          pass_user_data=True),
+                                          start),
                            ],
             CHOOSING_HOME_TEAM: [MessageHandler(Filters.text,
                                           team_home,
