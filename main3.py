@@ -38,7 +38,7 @@ def team_away(bot, update, user_data):
 	text = update.message.text
 	user_data['team_home'] = text
 	
-	reply_keyboard = apidata.allcomands_ls(text)
+	reply_keyboard = apidata.allcomands_ls(user_data['league'])
 	markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
 	update.message.reply_text("Choose away team!",reply_markup=markup)
 	
