@@ -46,6 +46,7 @@ def team_home(bot, update,user_data):
 def team_away(bot, update, user_data):
 	try:
 		text = update.message.text
+		print (text)
 		if text!='Back to main menu':
 			user_data['team_home'] = text
 
@@ -65,6 +66,7 @@ def team_away(bot, update, user_data):
 def final_message(bot, update, user_data):
 	try:
 		text = update.message.text
+		print (text)
 		if text!='Back to main menu':
 			user_data['team_away'] = text
 
