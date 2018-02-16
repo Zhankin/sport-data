@@ -5,7 +5,7 @@ from telegram import ReplyKeyboardMarkup
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, RegexHandler,
                           ConversationHandler)
 
-CHOOSING_LEAGUE, TYPING_REPLY_1TEAM = range(2)
+CHOOSING_HOME_TEAM, CHOOSING_AWAY_TEAM = range(2)
 
 
 def facts_to_str(user_data):
@@ -22,22 +22,31 @@ def start(bot, update):
 	markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
 	update.message.reply_text("Choose your destiny!",reply_markup=markup)
 	
-	return CHOOSING_LEAGUE
+	return CHOOSING_HOME_TEAM
 
-def teams_list(bot, update,user_data):
+def team_home(bot, update,user_data):
 	text = update.message.text
 	user_data['choice'] = text
 	
 	reply_keyboard = apidata.allcomands_ls(text)
 	markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
-	update.message.reply_text("Choose your destiny!",reply_markup=markup)
+	update.message.reply_text("Choose home team!",reply_markup=markup)
 	
-	return TYPING_REPLY_1TEAM
+	return CHOOSING_AWAY_TEAM
 
-def team2_choise(bot, update, user_data):
-    update.message.reply_text("okok")
-    user_data.clear()
-    return ConversationHandler.END
+def team_away(bot, update, user_data):
+	text = update.message.text
+	user_data['choice'] = text
+	
+	reply_keyboard = apidata.allcomands_ls(text)
+	markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
+	update.message.reply_text("Choose away team!",reply_markup=markup)
+	
+	return FINAL
+
+def final(bot, update, user_data):
+	update.message.reply_text(user_data)
+	#return TYPING_REPLY_1TEAM
 
 def done(bot, update, user_data):
     update.message.reply_text("Bye")
@@ -73,15 +82,20 @@ if __name__ == "__main__":
         entry_points=[CommandHandler('start', start)],
 
         states={
-            CHOOSING_LEAGUE: [MessageHandler(Filters.text,
-                                          teams_list,
+            CHOOSING_HOME_TEAM: [MessageHandler(Filters.text,
+                                          team_home,
                                           pass_user_data=True),
                            ],
 
-            TYPING_REPLY_1TEAM: [MessageHandler(Filters.text,
+            CHOOSING_AWAY_TEAM: [MessageHandler(Filters.text,
                                            team2_choise,
                                            pass_user_data=True),
                             ],
+            FINAL: [MessageHandler(Filters.text,
+                                           final,
+                                           pass_user_data=True),
+                            ],
+		
         },
 
         fallbacks=[RegexHandler('^Done$', done, pass_user_data=True)]
