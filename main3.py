@@ -26,7 +26,7 @@ def start(bot, update):
 	except:
 		update.message.reply_text("Please try again from /start")
 		return FINAL
-def go_back(bot, update,user_data):
+def go_back(bot):
 	try:
 		reply_keyboard = apidata.getallleague_ls()
 		markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True, resize_keyboard=False)
@@ -125,8 +125,7 @@ if __name__ == "__main__":
 
         states={
             CHOOSING_LEAGUE: [MessageHandler(Filters.text,
-                                          go_back,
-                                          pass_user_data=True),
+                                          go_back),
                            ],
             CHOOSING_HOME_TEAM: [MessageHandler(Filters.text,
                                           team_home,
