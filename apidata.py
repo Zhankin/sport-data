@@ -416,4 +416,7 @@ def allcomands_ls(need):
 		output=[]
 		output.append(x['name'])
 		output2.append(output)
+	output=[]
+	output.append("Back to main menu")
+	output2.append(output)
 	return output2
