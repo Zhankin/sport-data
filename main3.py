@@ -48,9 +48,12 @@ def team_away(bot, update, user_data):
 def final_message(bot, update, user_data):
 	text = update.message.text
 	user_data['team_away'] = text
-	update.message.reply_text(user_data)
-	#return TYPING_REPLY_1TEAM
-
+	
+	output=apidata.mainfunc(user_data['league'],user_data['team_home'],user_data['team_away'])
+	update.effective_message.reply_photo(photo=open('test.png','rb'))
+	user_data.clear()
+	return ConversationHandler.END
+	
 def done(bot, update, user_data):
     update.message.reply_text("Bye")
     user_data.clear()
