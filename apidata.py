@@ -281,7 +281,7 @@ def printall(data):
 'Team2 Total 1T>0.5','Team2 Total 1T>1.5','Team2 Total 2T>0.5','Team2 Total 2T>1.5',
 'Team2 Total 1T<0.5','Team2 Total 1T<1.5','Team2 Total 2T<0.5','Team2 Total 2T<1.5',
 'Team 1 Total 1T>2T','Team 1 Total 2T>1T','Team 1 Total 1T=2T',
-'Team 2 Total 1T>2T','Team 2 Total 2T>2T','Team 2 Total 1T=2T','Total<1.5']
+'Team 2 Total 1T>2T','Team 2 Total 2T>2T','Team 2 Total 1T=2T']
 	ls_name_data=['Win','Loss','Draw','1X','X2',
 'Total>1.5','Total>2.5','Total>3.5',
 'Total<1.5','Total<2.5','Total<3.5',
@@ -293,7 +293,7 @@ def printall(data):
 'Team2 Total 1T>0.5','Team2 Total 1T>1.5','Team2 Total 2T>0.5','Team2 Total 2T>1.5',
 'Team2 Total 1T<0.5','Team2 Total 1T<1.5','Team2 Total 2T<0.5','Team2 Total 2T<1.5',
 'Team 1 Total 1T>2T','Team 1 Total 2T>1T','Team 1 Total 1T=2T',
-'Team 2 Total 1T>2T','Team 2 Total 2T>2T','Team 2 Total 1T=2T','Total<1.5']
+'Team 2 Total 1T>2T','Team 2 Total 2T>2T','Team 2 Total 1T=2T']
 	z=0
 	ls_for_export=[]
 	for x,y in zip(ls_name_export,ls_name_data):
@@ -348,7 +348,7 @@ def mainfunc(team1,team2,league):
 'Team2 Total 1T>0.5','Team2 Total 1T>1.5','Team2 Total 2T>0.5','Team2 Total 2T>1.5','-',
 'Team2 Total 1T<0.5','Team2 Total 1T<1.5','Team2 Total 2T<0.5','Team2 Total 2T<1.5','-',
 'Team 1 Total 1T>2T','Team 1 Total 2T>1T','Team 1 Total 1T=2T','-',
-'Team 2 Total 1T>2T','Team 2 Total 2T>2T','Team 2 Total 1T=2T','Total<1.5']
+'Team 2 Total 1T>2T','Team 2 Total 2T>2T','Team 2 Total 1T=2T']
 	z=0
 	z1=0
 	for x in ls_name_export:
