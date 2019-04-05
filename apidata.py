@@ -241,7 +241,7 @@ def addcolumn(data,stadium):
 	return data,data2
 
 def byteam(team,need_id,data):
-	r=requests.get('http://api.football-data.org/v1/competitions/'+need_id+'/teams', headers={'X-Auth-Token': key})
+	r=requests.get('http://api.football-data.org/v2/competitions/'+need_id+'/teams', headers={'X-Auth-Token': key})
 	response=r.json()
 	for x in response['teams']:
 		if x['name']==team:
@@ -250,7 +250,7 @@ def byteam(team,need_id,data):
 			z=0
 			for y in fix['fixtures']:
 				if y['status']=='FINISHED':
-					if y['_links']['competition']['href']=='http://api.football-data.org/v1/competitions/'+need_id:
+					if y['_links']['competition']['href']=='http://api.football-data.org/v2/competitions/'+need_id:
 						#if y['result'].has_key('halfTime')==True:
 						if 'halfTime' in y['result']:
 							if y['homeTeamName']==team:
