@@ -303,7 +303,7 @@ def printall(data):
 	return output,ls_for_export
 
 def getleague(need):
-	r=requests.get("http://api.football-data.org/v1/competitions", headers={'X-Auth-Token': key})
+	r=requests.get("http://api.football-data.org/v2/competitions", headers={'X-Auth-Token': key})
 	response=r.json()
 	for x in response:
 		if x['caption']==need:
@@ -363,14 +363,14 @@ def mainfunc(team1,team2,league):
 
 key='644aa8f8c2e74a0d8a30523677bfa6de'
 def getallleague():
-	r=requests.get("http://api.football-data.org/v1/competitions", headers={'X-Auth-Token': key})
+	r=requests.get("http://api.football-data.org/v2/competitions", headers={'X-Auth-Token': key})
 	response=r.json()
 	output=''
 	for x in response:
 		output=output+'\n'+x['caption']
 	return output
 def getallleague_ls():
-	r=requests.get("http://api.football-data.org/v1/competitions", headers={'X-Auth-Token': key})
+	r=requests.get("http://api.football-data.org/v2/competitions", headers={'X-Auth-Token': key})
 	response=r.json()
 	output2=[]
 	for x in response:
@@ -380,21 +380,21 @@ def getallleague_ls():
 	return output2
 
 def getallleague_ls2():
-	r=requests.get("http://api.football-data.org/v1/competitions", headers={'X-Auth-Token': key})
+	r=requests.get("http://api.football-data.org/v2/competitions", headers={'X-Auth-Token': key})
 	response=r.json()
 	output=[]
 	for x in response:
 		output.append(x['caption'])
 	return output
 def allcomands(need):
-	r=requests.get("http://api.football-data.org/v1/competitions", headers={'X-Auth-Token': key})
+	r=requests.get("http://api.football-data.org/v2/competitions", headers={'X-Auth-Token': key})
 	response=r.json()
 	for x in response:
 		if x['caption']==need:
 			need_id=str(x['id'])
 			break
 
-	r=requests.get('http://api.football-data.org/v1/competitions/'+need_id+'/teams', headers={'X-Auth-Token': key})
+	r=requests.get('http://api.football-data.org/v2/competitions/'+need_id+'/teams', headers={'X-Auth-Token': key})
 	response=r.json()
 	output=''
 	for x in response['teams']:
@@ -402,14 +402,14 @@ def allcomands(need):
 	return output
 
 def allcomands_ls(need):
-	r=requests.get("http://api.football-data.org/v1/competitions", headers={'X-Auth-Token': key})
+	r=requests.get("http://api.football-data.org/v2/competitions", headers={'X-Auth-Token': key})
 	response=r.json()
 	for x in response:
 		if x['caption']==need:
 			need_id=str(x['id'])
 			break
 
-	r=requests.get('http://api.football-data.org/v1/competitions/'+need_id+'/teams', headers={'X-Auth-Token': key})
+	r=requests.get('http://api.football-data.org/v2/competitions/'+need_id+'/teams', headers={'X-Auth-Token': key})
 	response=r.json()
 	output2=[]
 	for x in response['teams']:
